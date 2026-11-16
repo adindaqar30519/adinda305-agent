@@ -16,7 +16,6 @@ import { fileURLToPath } from "node:url";
 import * as snarkjs from "snarkjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, ".."); // ~/workspace/agentgames
 
 // ---------------------------------------------------------------------------
 // Konfigurasi
@@ -26,13 +25,13 @@ export const OFFICIAL_VK_HASH =
 const FIELD_PRIME =
   21888242871839275222246405745257275088548364400416034343698204186575808495617n;
 const PORT = Number(process.env.PORT || 3000);
-const HOST = process.env.HOST || "127.0.0.1";
-const WASM_PATH = path.join(ROOT, "circuits", "gatekeeper.wasm");
-const ZKEY_PATH = path.join(ROOT, "circuits", "gatekeeper_final.zkey");
+const HOST = process.env.HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
+const WASM_PATH = path.join(__dirname, "circuits", "gatekeeper.wasm");
+const ZKEY_PATH = path.join(__dirname, "circuits", "gatekeeper_final.zkey");
 const VK_PATH = path.join(__dirname, "verification_key.json");
 const SEEN_PATH = path.join(__dirname, "seen.json");
 const LOG_PATH = path.join(__dirname, "tasks.log");
-const SECRET_FILE = path.join(ROOT, "hmac-secret.txt");
+const SECRET_FILE = path.join(__dirname, "hmac-secret.txt");
 const INTERNAL_BUDGET_MS = 50_000; // batas internal, di bawah deadline platform 60 dtk
 
 // ---------------------------------------------------------------------------
